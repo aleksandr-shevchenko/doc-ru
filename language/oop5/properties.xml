@@ -36,7 +36,7 @@
   Доступ к статическим свойствам осуществляется с помощью <literal>::</literal>
   (двойного двоеточия): <varname>self::$property</varname>. Дополнительную информацию о различии
   статических и нестатических свойств смотрите в разделе
-  "<link linkend="language.oop5.static">Ключевое слово Static</link>".
+  "<link linkend="language.oop5.static">Ключевое слово static</link>".
  </para>
  <para>
   Псевдопеременная <varname>$this</varname> доступна внутри
@@ -201,9 +201,11 @@ class Test {
        $this->prop = $prop;
    }
 }
+
 $test = new Test("foobar");
 // Правильное чтение.
 var_dump($test->prop); // string(6) "foobar"
+
 // Неправильное переопределение. Не имеет значения, что присвоенное значение такое же.
 $test->prop = "foobar";
 // Ошибка: невозможно изменить readonly-свойство Test::$prop
@@ -234,6 +236,7 @@ $test->prop = "foobar";
 class Test1 {
     public readonly string $prop;
 }
+
 $test1 = new Test1;
 // Неправильная инициализация за пределами закрытой области.
 $test1->prop = "foobar";
@@ -278,6 +281,7 @@ class Test {
         public readonly array $ary = [],
     ) {}
 }
+
 $test = new Test;
 $test->i += 1;
 $test->i++;
@@ -302,6 +306,7 @@ foreach ($test as &$prop);
 class Test {
     public function __construct(public readonly object $obj) {}
 }
+
 $test = new Test(new stdClass);
 // Правильное внутреннее изменение.
 $test->obj->foo = 1;
